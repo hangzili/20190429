@@ -1,0 +1,23 @@
+上午:
+1.查看服务器性能命令
+	ps aux 
+	netstat
+	top
+2.文件查找命令
+	find====查找文件
+	grep====过滤
+	awk===切割
+	|===管道符
+	sort===排序
+	uniq==过滤
+		1、获取访问网站次数最多的ip地址
+			cat access.log  | awk -F " " '{print $1}' | sort | uniq -c  | sort -nr  | head  -n 10 | awk -F " " '{print $2}' > ip.txt
+		2、获取访问次数最多的url
+
+
+		33，读取ie浏览器有多少数字
+			cat access.log | awk -F " " '{print $13}' | grep 'Windows$' | wc -l        16379
+		4，获取get请求有多少个
+			cat access.log | awk -F " " '{print $6}' | grep 'GET$' | wc -l        37254
+		5.获取123.12.22.48  出现次数
+			

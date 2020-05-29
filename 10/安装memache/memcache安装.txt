@@ -1,0 +1,30 @@
+﻿下载路径
+http://memcached.org/files/memcached-1.5.11.tar.gz   [memcache软件]
+libevent-2.1.8-stable.tar.gz [扩展软件]
+memcache-2.2.1.tgz [扩展PHP]
+================================================================================
+
+[root@master libevent-2.1.8-stable]# tar -xvf libevent-2.1.8-stable.tar.gz 
+[root@master libevent-2.1.8-stable]# ./configure --prefix=/usr/local/libevent/
+[root@master libevent-2.1.8-stable]# make && make install
+======================================================================================
+memcache安装
+[root@master soft]# tar -xvf memcached-1.5.11.tar.gz 
+[root@master memcached-1.5.11]# ./configure --with-libevent=/usr/local/libevent/ --prefix=/usr/local/memcached/
+[root@master memcached-1.5.11]# make && make install
+======================================================================================
+启动:
+	/usr/local/memcached/bin/memcached -u nobody -m 64 -p 11211 -d 
+========================================================================================
+安装php扩展
+	下载依赖:https://pecl.php.net/package-search.php?pkg_name=memcache
+	[root@localhost libmemcached-1.0.18]# ./configure --prefix=/usr/local/libmemcached/
+	[root@localhost libmemcached-1.0.18]# make && make install
+安装扩展[libmemcache][https://launchpad.net/libmemcached/+download]
+检查过程
+	[root@localhost memcached-3.1.3]# ./configure --with-php-config=/usr/local/php7/bin/php-config --with-libmemcached-dir=/usr/local/libmemcached/ --disable-memcached-sasl
+	[root@localhost memcached-3.1.3]# make
+	[root@localhost memcached-3.1.3]# make install
+	Installing shared extensions:     /usr/local/php7/lib/php/extensions/no-debug-non-zts-20170718/
+下面的在说
+复制配置文件

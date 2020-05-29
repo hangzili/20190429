@@ -1,0 +1,33 @@
+上午说下nignx
+	1.location 匹配规则
+		1.通过请求url里面有baidu字符串跳转百度
+		   location /baidu {
+			 rewrite (.*) https://www.baidu.com break;
+		   }
+		2.区分大小写 ~
+			location  ~ baidu {
+			 rewrite (.*) https://www.baidu.com break;
+		   }
+		3.不区分大小写
+			location  ~* baidu {
+			 rewrite (.*) https://www.baidu.com break;
+			}
+		4.nginx常用变量
+			1.常用的
+				$http_user_agent  =======观察用户使用浏览器
+			例子:如果是谷歌浏览器跳转百度
+			if ( $http_user_agent ~* chrome ) {
+				rewrite (.*) https://www.baidu.com;
+			}
+				$request_filename=====请求的文件
+				-f:代表文件
+				-d:代表目录
+				-e:文件是否存在
+			   if (!-f $request_filename ) {
+					rewrite .* /aa.php last;
+				}
+2.php的优化
+3.演示如何部署项目
+ 下午:
+	nginx反向代理
+	网站架构

@@ -1,0 +1,17 @@
+1.安装依赖：
+[root@localhost php-7.2.13]# yum install -y make cmake gcc gcc-c++ autoconf automake libpng-devel libjpeg-devel zlib libxml2-devel ncurses-devel bison libtool-ltdl-devel libiconv libmcrypt mhash mcrypt pcre-devel openssl-devel freetype-devel libcurl-devel
+2.解压文件:
+[root@localhost php-7.2.13]# tar -xvf php-7.2.13.tar.gz 
+3.预检查:
+[root@localhost php-7.2.13]# ./configure --prefix=/usr/local/php7 --with-mysql --with-mysqli --with-pdo_mysql --with-iconv-dir --with-zlib --with-libxml-dir --enable-xml --enable-fpm --enable-mbstring --with-gd --with-openssl --with-mhash --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-freetype-dir=/usr/lib64
+4.编译:
+[root@localhost php-7.2.13]# make
+5.安装
+[root@localhost php-7.2.13]# make install
+6.配置[php的配置文件]
+[root@localhost php-7.2.13]# cp /soft/php-7.2.13/php.ini-development /usr/local/php7/etc/php.ini
+7.配置php-fpm配置文件
+[root@localhost etc]# cp /usr/local/php7/etc/php-fpm.conf.default  /usr/local/php7/etc/php-fpm.conf
+8.配置php-fpm
+	[root@localhost php-fpm.d]# mv www.conf.default  www.conf
+9.启动php
