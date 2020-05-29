@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link href="../css/Noname2.css" rel="stylesheet">
+ </head>
+ <body>
+  <div class="q">
+		<div class="q1">
+			<div class="q11"><img src="../images/1_03.gif"></div>
+			<div class="q12">
+			<form>
+				<input type="text"class="q121">
+			</form>
+			<div class="q122"><input type="image" src="../images/2_06.gif"></div>
+			</div>
+			<div class="q13">
+				<div class="q131">
+				<input type="image" src="../images/3_06.gif" class="q1311">
+				<a href="">立即登陆</a>
+				</div>
+				<div class="q132">
+				<a href="">观看记录</a>
+				</div>
+				<div class="q133"><input type="image" src="../images/4_06.gif" class="q1312">
+				<a href="">APP下载</a>
+				</div>
+			</div>
+	
+		<div class="q2">
+			<ul>
+				<li><a href="">首页</a></li>
+				<li><a href="">百家</a></li>
+				<li><a href="">财经</a></li>
+				<li><a href="">娱乐</a></li>
+				<li><a href="">体育</a></li>
+				<li><a href="">互联网</a></li>
+				<li><a href="">时尚</a></li>
+				<li><a href="">汽车</a></li>
+				<li><a href="">国内</a></li>
+				<li><a href="">国际</a></li>
+				<li><a href="">军事</a></li>
+				<li><a href="">视频</a></li>
+				<li><a href="">传媒</a></li>
+				<li><a href="">个性推荐</a></li>
+				<li><a href="">房产</a></li>
+				<li><a href="">更多</a></li>
+			</ul>
+		</div>
+		<div class="q3"><img src="../images/试卷_06.gif"></div>
+		<div class="q4">
+		<form>
+		<table width="369px" height="396px">
+		<tr>
+			<td>用户名：</td>
+			<td><input type="text">*</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><p>可以使用中文，但禁止特殊符号</p></td>
+		</tr>
+		<tr>
+			<td>登陆密码：</td>
+			<td><input type="password"></td>
+		</tr>
+		<tr>
+			<td>确认密码：</td>
+			<td><input type="password"></td>
+		</tr>
+		<tr>
+			<td>电子邮箱：</td>
+			<td><input type="email"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><p>每个电子邮箱只能注册一个账号</p></td>
+		</tr>
+		<tr>
+			<td>安全问题：</td>
+			<td>
+			<select>
+				<option>没安全提示问题</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><p>忘记密码时重设密码用</p></td>
+		</tr>
+		<tr>
+			<td>问题答案：</td>
+			<td><input type="text"></td>
+		</tr>
+		<tr>
+			<td>验证码：</td>
+			<td><input type="text"><input type="image" src="../images/试卷_03_07.gif"><p>看不清点击验证码更换</p></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="image" src="../images/试卷5_07.gif"><input type="checkbox" checked>大图用户协议</td>
+		</tr>
+		</table>
+		</form>
+		</div>
+		<div class="q5">
+		<table border="1px" width="574px" height="412px">
+			<tr>
+				<td></td>
+				<td></td>
+				<td colspan="4">基金概况</td>
+				
+				
+				<td></td>
+				
+			</tr>
+			<tr>
+				<td>对比</td>
+				<td>序号</td>
+				<td>基金简称</td>
+				<td>基金经理</td>
+				<td>投资策略</td>
+				<td>运行时间</td>
+				<td>咨询</td>
+				
+				
+			</tr>
+			<tr>
+				<td><input type="image" src="../images/试卷7_10.gif"></td>
+				<td>1</td>
+				<td>鑫兰瑞</td>
+				<td>刘睿</td>
+				<td>股票策略</td>
+				<td>7年9月</td>
+				<td><input type="image" src="../images/试卷7_07.gif"></td>
+				
+				
+			</tr>
+			<tr>
+				<td><input type="image" src="../images/试卷7_10.gif"></td>
+				<td>2</td>
+				<td>亿龙中国</td>
+				<td>刘红海</td>
+				<td>股票策略</td>
+				<td>10年1月</td>
+				<td><input type="image" src="../images/试卷7_07.gif"></td>
+				
+				
+			</tr>
+			<tr>
+				<td><input type="image" src="../images/试卷7_10.gif"></td>
+				<td>3</td>
+				<td>乐茂精选</td>
+				<td>曾小结</td>
+				<td>股票策略</td>
+				<td>7年10月</td>
+				<td><input type="image" src="../images/试卷7_07.gif"></td>
+				
+				
+			</tr>
+			<tr>
+				<td><input type="image" src="../images/试卷7_10.gif"></td>
+				<td>4</td>
+				<td>展博1期</td>
+				<td>刘睿</td>
+				<td>股票策略</td>
+				<td>6年11月</td>
+				<td><input type="image" src="../images/试卷7_07.gif"></td>
+			
+				
+			</tr>
+			<tr>
+				<td><input type="image" src="../images/试卷7_10.gif"></td>
+				<td>5</td>
+				<td>洪昌价值成长</td>
+				<td>--</td>
+				<td>股票策略</td>
+				<td>1年7月</td>
+				<td><input type="image" src="../images/试卷7_07.gif"></td>
+				
+				
+			</tr>
+			<tr>
+				<td><input type="image" src="../images/试卷7_10.gif"></td>
+				<td>6</td>
+				<td>银帆3期</td>
+				<td>--</td>
+				<td>股票策略</td>
+				<td>4年10月</td>
+				<td><input type="image" src="../images/试卷7_07.gif"></td>
+				
+				
+			</tr>
+			<tr>
+				<td><input type="image" src="../images/试卷7_10.gif"></td>
+				<td>7</td>
+				<td>晋龙1号</td>
+				<td>杨达治</td>
+				<td>股票策略</td>
+				<td>8年9月</td>
+				<td><input type="image" src="../images/试卷7_07.gif"></td>
+				
+				
+			</tr>
+		</table>
+		</div>
+  </div>
+ </body>
+</html>
