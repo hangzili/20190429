@@ -1,0 +1,170 @@
+微信小程序
+
+1、下载微信开发者工具
+	https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
+
+2、申请一个测试号
+	https://developers.weixin.qq.com/sandbox
+
+3、目录结构：
+	Pages ： 微信小程序的所有页面
+		Index： 
+			index.js : 业务逻辑都是在js文件中去写    	[ JS代码，mvc中的controller ]
+			index.json : 页面的配置文件 【 如何去显示 】   
+			index.wxml : 小程序的页面文件  				【 mvc框架的view 】
+			index.wxss : 小程序的样式文件 				【 和html中 css文件一致，用来规定页面的显示效果 】
+
+
+	utils ： 第三方类库
+	app.js : 核心js文件
+	app.wxss ： 微信的样式文件 【公共样式文件，所有的页面都会加载这个文件】
+	project.config.json : 项目配置文件
+	sitemap: 设置是否运行被搜索 
+	app.json : 全局的配置
+
+4、矢量图下载：
+	https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&cid=13720
+
+
+5、 APP.JSON
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "1908-wxapp",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar":{
+      "position":"bottom",
+      "borderStyle":"black",
+      "backgroundColor":"#eee",
+      "selectedColor":"#0000FF",
+      "list":[
+        {
+          "text":"首页",
+          "pagePath":"pages/index/index",
+          "iconPath":"/static/images/index.png",
+          "selectedIconPath": "/static/images/index_s.png"
+        },{
+          "text": "首页",
+          "pagePath": "pages/index/index",
+          "iconPath": "/static/images/index.png",
+          "selectedIconPath": "/static/images/index_s.png"
+        },{
+          "text": "首页",
+          "pagePath": "pages/index/index",
+          "iconPath": "/static/images/index.png",
+          "selectedIconPath": "/static/images/index_s.png"
+        },{
+          "text": "个人中心",
+          "pagePath": "pages/logs/logs",
+          "iconPath": "/static/images/person.png",
+          "selectedIconPath": "/static/images/person_s.png"
+        }
+      ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
+
+6、页面配置 	
+	文件存放那个在page下的目录，和wxml文件同名的 json的文件
+
+	页面配置的优先级高于全局配置，如果配置了页面的显示效果，则全局的会失效。
+
+
+7、App.js中的 globalData代表的是全局的数据，在小程序运行的过程中都可以访问到。
+
+	获取的时候使用：
+		    var obj = getApp();
+
+		    console.log(obj.globalData);
+8、Page(Object object)
+注册小程序中的一个页面。在pages下的目录，每个页面都需要在js中定义page方法。
+
+
+	onLoad  页面加载事件
+	onShow 生命周期回调—监听页面显示
+	onReady 生命周期回调—监听页面初次渲染完成
+	onPullDownRefresh 监听用户下拉动作
+	onReachBottom 页面上拉触底事件的处理函数
+	onPageScroll 页面滚动触发事件的处理函数
+
+9、未找到 app.json 中的定义的 pages "pages/test" 对应的 WXML 文件
+
+
+10、引用工具文件
+
+function sayHello(name) {
+  console.log(`Hello ${name} !`)
+}
+function sayGoodbye(name) {
+  console.log(`Goodbye ${name} !`)
+}
+
+module.exports.sayHello = sayHello
+exports.sayGoodbye = sayGoodbye
+
+var common = require('../../utils/common.js');
+在js文件可以使用 common.sayGoodbye 调用common的方法。
+
+11、wxml 基本语法：
+	变量 {{变量名字}}
+
+	变量的定义放在 js文件中的 page方法下的 data:{
+		"变量名字":"变量的值"
+	}
+
+	bindtap 添加点击事件 
+	bindtap  = "要调用的方法名字"
+
+	方法定义放在 对应的js文件中：
+	changeName:function( e ) {
+	    // wx.showModal({
+	    //   title: 'z这里是标题',
+	    //   content: '这里是内容',
+	    // })
+	    var name = 'LiKang' + Math.random();
+	    this.setData({
+	      user_name: name
+	    })
+	  }
+
+
+	wx.showtoast 提示信息
+	wx.showmodal 遮罩层
+
+	设置当前页面的Data数据
+
+	this.setData({
+      user_name:'ZhangSan'
+    })
+
+
+    wx:if 是WXML中的判断标签
+
+    wx:for
+
+
+	<template name="msgItem">
+	  <view>
+	    <text> {{index}}: {{msg}} </text>
+	    <text> Time: {{time}} </text>
+	  </view>
+	</template>
+
+
+
+	<template is="msgItem" data="{{...item}}"/>
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+﻿DML语句
+建表              
+mysql> create table t_t(
+    -> id int(11) primary key auto_increment,
+    -> name varchar(11));
+Query OK, 0 rows affected (0.01 sec)
+#删除表
+	drop table tableName\G;
+#查看表状态
+	show table status\G;
+#清空
+	truncate table detail;
+	mysql> desc t_t;
+	+-------+-------------+------+-----+---------+----------------+
+	| Field | Type        | Null | Key | Default | Extra          |
+	+-------+-------------+------+-----+---------+----------------+
+	| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+	| name  | varchar(11) | YES  |     | NULL    |                |
+	+-------+-------------+------+-----+---------+----------------+
+	mysql> alter table t_t add column pwd varchar(20); #添加列
+	mysql> alter table t_t change pwd pwds varchar(20);#修改
+	mysql> alter table t_t drop column pwds;#删除表列
+1.水平分表
+	水平分表分的是数据
+2.垂直分表
+	垂直分表分的字段
+	
+表文件物理存储      表的引擎   myisam  inmdb
+		标记一个表文件存储位置datadir=""来制定我的数据的存储位置
+		每个mysql的库其实就是目录，每个表其实就是一个普通文件
+		myisam
+			xxx.MYI====表上面的索引信息
+			xxx.MYD====表里面存放的数据
+			xxx.FRM====表的框架信息
+		inmdb	engin=innodb   表的结构为db     查看mysql支持马中引擎 show engines  ;
+		  

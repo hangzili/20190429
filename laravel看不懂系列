@@ -1,0 +1,572 @@
+目录结构：
+
+	app  放应用的目录
+
+		console  控制台的命令
+		exceptions 异常类的目录
+		http     控制器。。。
+
+			controllers 控制器
+			middleware 中间件
+
+		providers  服务提供者
+
+		Models   模型
+
+
+	bootstrap  存放laravel的启动文件
+	config   存放配置文件
+	database  数据迁移文件夹  
+	public  网站的根目录
+
+	resources 资源文件
+		views 视图目录
+
+	routes 路由目录
+		web.php  web端路由
+
+	storage 存储
+		app   文件上传目录
+		framework  跟网站相关的各类缓存文件
+		logs   日志相关
+
+	tests 单元测试
+	vendor 存放当前框架依赖的各种库,使用composer会自动生成
+
+	.env 环境配置文件
+	artisan laravel命令行执行
+
+
+书写规范：
+
+	a. 控制器的名字  Controller结尾  首字母大写
+
+					 ArrController  
+
+					 StudentController
+
+					 见名识意
+
+					 UserController 
+
+	b. 视图名字 尽量保证与方法名字一样
+
+
+几个问题：
+
+	1. 写了路由访问不了？
+		a. 检查web.php的大小写 
+		b. nginx或者apache有没有开启
+		c. 自定义一个新的路由，使用闭包测试一下即可
+		d. 重启phpstudy
+		e. 重新使用composer安装一个新的laravel框架
+
+	2. 让nginx支持隐藏index.php
+		public/nginx.htaccess 文件中添加
+
+			try_files $uri $uri/ /index.php?$query_string;
+
+
+1. 写一个简单的controller，调用视图
+
+2. 配置nginx隐藏index.php
+
+	location / {
+	
+	   try_files $uri $uri/ /index.php?$query_string;
+	
+    }
+
+3.  路由
+
+	
+4. 控制器
+
+	php artisan make:controller StudentController
+
+5. 控制器中调用视图
+	
+	return  view('index');
+
+	视图存放在resource目录下的views目录下
+
+6. 如何获取请求参数
+
+	Request $request ;
+	$request->all();
+
+
+7. 数据库的操作
+
+	DB:: insert
+	DB:: select
+	DB:: delete
+	DB:: update
+
+8. 增删改查的一个简单示例
+
+	分页： DB::table('students')->paginate(2);
+
+
+作业：
+	在老师的代码基础上完成修改、删除功能
+
+	查看手册中的 分页  预习模型  
+
+
+9. 视图模板引擎 blade
+
+	a. 输出值  {{ $name }} => <?=  $name ?> => <?php echo $name; ?>
+
+	b. 模板布局与继承
+
+		@section('name')  定义某一个块
+			....
+		@show
+
+
+		@yield('content') 定义这个块未来将被其他内容所取代
+
+		@extends('view.layout')  路径是相对于resource/views目录而言的
+
+		使用@section去替换@yield定义的区域
+10. Model
+	a. 默认模型的名字对应表的名字为模型名字+s
+
+		student  => students
+		studentModel  => studentModels
+	b. 模型默认的主键为id 若不是id
+		protected $primaryKey = 'uid';
+
+	c. 模型默认的主键为int且为自增，若不想自增
+	    protected $incrementing = false;
+
+	d. 若与模型关联的表的主键不是int型，则需要设置
+		protected $keyType = 'string'
+
+	e. laravel model自动维护两个时间  create_at update_at
+
+		1)  如果表中不存在这两个时间
+		    public $timestamps = false;
+		    取消自动维护
+
+		2)  如果表中有时间字段，但是时间字段名字不是create_at / update_at
+
+			定义两个常量
+
+			const CREATED_AT = 'ctime';
+			const UPDATED_AT = 'utime';
+
+		3) 如果表中时间字段不是timestamp类型，而是其他类型，比如int
+
+			protected $dateFormat = 'U'; // U表示时间戳类型
+
+
+	// 插入
+    	// $model = new StudentModel();
+
+    	// $model->name = '小姐姐';
+    	// $model->sex = '女';
+    	// $model->age = 20;
+
+    	// $dt = $model->save();
+
+    	// 更新
+    	// $data = StudentModel::find(41);
+    	// $data->name = "小哥哥我要...";
+    	// $dt = $data->save();
+    	// 删除
+    	// $data = StudentModel::find(41);
+    	// $dt = $data->delete();
+
+    	// 查询
+    	// 单条记录  find  first
+    	// 多条数据  get  all
+
+    	// findOrFail 找到则返回数据，没有该条数据则跳转至404页面
+    	//$data = StudentModel::findOrFail(41);
+
+    	// 批量赋值
+    	$data =StudentModel::create(['name'=>'xxxx','age'=>20,'sex'=>'保密']);
+
+    	dd($data->uid);
+
+    	dd($data);
+
+
+laravel中登录注册
+
+	一般流程:
+		先设置路由  注册 登录
+		设计页面
+		登录控制器
+			a. 接收用户名和密码
+			b. 验证
+			c. 查询数据库中是否有该用户名和密码
+			d. 如果有跳转到指定的路由
+			e. 如果没有该用户名或者密码不对则返回登录页并提示错误信息
+
+
+	laravel中路由
+	get  'login'=>'Auth\LoginController@showLoginForm')
+    post
+    'login' => 'Auth\LoginController@login');
+    post
+    'logout' => 'Auth\LoginController@logout')
+
+    get
+    'register'=> 'Auth\RegisterController@showRegistrationForm')
+    post
+    'register' => 'Auth\RegisterController@register')
+
+
+发送邮件
+
+	Mail::to('123456@qq.com')->send(new LoginSuccess(Auth::user()->name))
+
+	Mail::raw("hello",function($message){
+		$message->to('123456@qq.com');
+		$message->subject('这是一封测试邮件');
+	});
+
+	Mail::send('email.sendEmail',['name'=>$name],function($message){
+		$message->to('123456@qq.com');
+		$message->subject('这是一封测试邮件');
+	});
+
+队列发送邮件
+
+	1. 配置队列的存储方式  == database
+	2. 生成队列所用的数据表
+		php artisan queue:table 生成迁移文件
+		php artisan migrate 执行迁移文件生成数据表
+
+	3. 生成一个任务类
+		php artisan make:job  SendEmail
+
+	4. 在app目录下会生成jobs文件夹,修改SendEmail的内容
+
+		// 发送给谁  主体是什么 内容是什么
+		protected $user;
+		protected $subject;
+		protected $content;
+
+		function __construct($user,$subject,$content){
+			$this->user = $user;
+			$this->subject = $subject;
+			$this->content = $content;
+		}
+
+		function handle(){
+
+			Mail::send('email.login',['name'=>$this->user->name,'content'=>$this->content],function($message){
+
+				$message->to($this->user);
+				$message->subject($this->subject);
+			});
+		}
+
+
+	5. 在控制器中使用dispatch方法进行分发
+
+		$this->dispatch(new SendEmail($request->user,'这是一个队列测试邮件','OK'));
+
+	6. 执行控制器的方法，就会在数据表jobs中有一个记录
+
+
+
+	7. 执行消费者程序 ，一直运行着 
+
+		php artisan queue:work
+
+
+	也可以利用邮件类给我们提供的queue方法
+		php artisan make:mail LoginSuccess
+
+		Mail::to($request->user())->queue(new LoginSuccess($request->user()->name,"今天天气很棒喽，我们一起约个会吧！"));
+
+
+事件处理
+
+	注册事件 在providers下的EventServiceProvider.php中
+
+		$listen = [
+			// 事件名称
+			'App\Events\Login'=>[
+				// 监听器
+				'App\Listeners\SendAdMail'
+			]
+		];
+
+	使用php artisan命令生成事件文件和监听器文件
+
+		php artisan event:generate
+
+		会在app目录下出现Events和Listeners文件夹
+
+	修改 App\Events\Login.php 事件文件
+
+		定义自己需要传递给事件的参数
+
+		public $user;
+		public function __construct($user){
+			$this->user = $user;
+		}
+
+	修改监听器文件  SendAdEmail.php文件
+
+		 public function handle(Login $event)
+    	{
+	        // 从事件中拿到参数
+	        $this->user = $event->user;
+	        Mail::send('email.loginsuccess',['username'=>$this->user->name,'content'=>'嘿嘿嘿'],function($message){
+	            $message->to($this->user->email);
+	            $message->subject("恭喜您，登录成功!");
+	        });
+
+    	}
+
+    一般都有事件处理通常使用队列方式
+
+    	将监听器类实现ShouldQueue接口，如
+    	class SendAdMail implements ShouldQueue
+
+    然后启动队列消费者即可
+
+
+   	在需要触发事件的地方调用 event(new Login($this->guard()->user()));
+
+
+
+数据迁移
+
+	php artisan migrate 
+
+缓存
+
+	缓存的作用是： 存储数据，缓解服务器压力，提高访问速度
+
+	存储方式：内存　速度快
+			　外存（硬盘）　速度慢一点
+
+	缓存根据存储方式分为：
+			　内存缓存	　速度快　跟内存大小有关系　　
+
+					memcache
+						分布式高速缓存
+
+						默认端口号 11211
+						默认内存占用 64M
+						启动：
+
+					redis 
+
+						nosql 数据库 非关系型数据库
+
+					    数据类型：
+					    	字符串 key=>value
+					    	集合  set 特点：数据不能有重复的
+					    	有序集合  sortedset 
+					    	hash  
+					    	列表 list  php中数组一样的操作
+
+					key=>value 
+
+					安装：
+						记得勾选环境变量
+
+					测试有没有安装成功:
+						cmd 中 redis-server -h 能否出现帮助
+
+					默认端口 6379 
+					启动： redis-server 配置文件
+						   windows中 redis-server redis.windows-service.conf
+
+						   没有任何错误提示就表示启动成功了
+
+					测试： 启动redis客户端 连接服务
+
+						   redis-cli 
+
+					命令：
+							设置值  set key value 
+							获取值  get key 
+
+							清空所有值 flushall
+							切换到数据库  select 1
+
+					在laravel如何使用redis充当缓存
+
+						a. 安装predis/predis
+
+							composer require predis/predis
+
+						b. 修改配置文件
+
+							.env 中将CACHE_DRIVER=redis
+							config/cache.php
+							config/database.php 中查看redis的连接配置
+
+						c. 代码测试
+
+
+				　
+			　文件缓存　　速度慢　放任意大小的数据
+
+	laravel中使用缓存
+
+		Cache::get('key')
+		Cache::set('key','value')
+
+		设置有效期？
+		cache::put('key','value','expirement')
+
+		expirement: 600s  now()->addSeconds(100);
+
+
+错误日志
+	
+	report 报错异常
+	Log::info/error/debug 写日志文件
+
+	 	Log::info('这是一条调试信息:',['data'=>$data]);
+
+
+创建公共函数文件
+
+	1. 一般在项目目录中创建一个文件夹 functions 其中创建自己的函数文件function.php
+
+	2. 在目录下composer.json文件中 添加
+
+		{"autoload":{
+
+			"files": [
+				"functions/function.php",
+				"functions/common.php"
+			],
+
+		}}
+	3. 在目录下执行 composer dump-autoload 让自动加载文件重新生成
+
+	
+
+中间件
+	
+
+	中间件就好比关卡，起到过滤数据、权限验证。。。等作用
+
+	a. 生成中间件
+
+		php artisan make:middleware CheckLogin
+    b. 注册中间件
+    	在app\Http\Kernel.php中的 $routeMiddleware 属性中添加
+
+    		'CheckLogin'=> \App\Http\CheckLogin::class
+
+   	c. 使用中间件
+
+   		1. 某个特定的路由使用该中间件
+
+   			Route::get('/','IndexController@index')->middleware(['CheckLogin']);
+
+   		2. 多个路由使用该中间件 ，使用路由组
+
+   		    Route::group(['middleware'=>['CheckLogin']],function(){
+
+   		    	Route::get('/','IndexController@index');
+   		    	Route::any('/add','IndexController@add');
+   		    	...
+   		    });
+   		3. 直接使用中间件组
+
+
+实现前后台分离
+
+	a. 到app\Http\Kernel.php文件中添加组
+
+		$middlewareGroups 属性中添加
+
+		 'backend' => [
+            //"checkLogin",
+        ],
+
+    b. 到App\Providers中的RouteServiceProvider文件中添加路由分组
+
+    	 // 定义backend分组
+	    protected function mapBackendRoutes()
+	    {
+	        Route::prefix('backend')
+	             ->middleware('backend')
+	             ->namespace($this->namespace."\\backend")
+	             ->group(base_path('routes/backend.php'));
+	    }
+
+	    public function map()
+	    {
+        ...
+        $this->mapBackendRoutes();
+
+        //
+        }
+
+    c. 在routes文件夹中创建 backend.php文件 用于存储后天的路由
+
+    d. 在app\Http\Controllers中创建backend的文件夹用于存储后台的控制器
+
+
+    e. 在views/创建backend文件夹 用于存储后天的视图
+
+
+    php artisan make:controller backend\AdminController
+
+    namespace App\Http\Controllers\backend;
+
+	use Illuminate\Http\Request;
+	use App\Http\Controllers\Controller;
+
+	class AdminController extends Controller
+	{
+	    //
+	    //
+	    public function index(){
+	    	return view('backend.user.index');
+	    }
+	}
+
+
+
+任务调度
+
+
+命令执行
+
+
+综合：
+
+
+验证码实现
+
+
+发送邮件激活
+
+
+RBAC
+
+
+
+
+=================项目====   从今天开始=>9月30号之前
+	小组做
+
+电商的项目
+
+	商品 (SKU)
+	购物车
+	订单
+	支付（支付宝）
+	用户（注册/第三方登录）
+	优惠卷
+	用户签到/积分系统
+
+
+
